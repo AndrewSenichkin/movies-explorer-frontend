@@ -1,3 +1,2 @@
-[Макет](https://disk.yandex.ru/d/-tmWGoOnzdSIwQ)
+[Макет] light-3
 
-[Сайт](https://project.nomoredomains.rocks/)
