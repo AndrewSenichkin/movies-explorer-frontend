@@ -51,6 +51,7 @@
 
 .about-project__duration:first-of-type {
     background: #3456F3;
+    color: #FFFFFF;
 }
 
 .about-project__duration:before {

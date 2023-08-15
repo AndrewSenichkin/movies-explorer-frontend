@@ -2,7 +2,7 @@
   background-color: #F9F9F9;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 25px;
   line-height: 18px;
   min-height: 32px;
   min-width: 100px;
@@ -40,7 +40,7 @@
 .nav-profile-menu {
   background-image: url('./../../../../src/images/menu-button.svg');
   background-position: center;
-  background-color: #FFFFFF;
+  background-color: #FAFAFA;
   cursor: pointer;
   display: none;
   border: none;
