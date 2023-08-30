@@ -79,6 +79,7 @@
 }
 
 .movies-card__image {
+
   background-color: #F9F9F9;
   margin: 0 auto 0 auto;
   object-fit: cover;
@@ -86,6 +87,7 @@
   width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  aspect-ratio: 16 / 9;
 }
 
 @media screen and (max-width: 768px) {

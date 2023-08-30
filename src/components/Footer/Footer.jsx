@@ -6,7 +6,7 @@ function Footer() {
         <footer className='footer'>
             <h2 className='footer__title'>Учебный проект Яндекс.Практикум х BeatFilm.</h2>
             <div className="footer__container">
-                <p className='footer__copy'>&copy; 2023</p>
+                <p className='footer__copy'>&copy; {new Date().getFullYear()}</p>
                 <nav className="footer__links-nav">
                     <ul className="footer__links">
                         <li className="footer__link">

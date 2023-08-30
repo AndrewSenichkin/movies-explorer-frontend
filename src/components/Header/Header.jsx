@@ -2,7 +2,7 @@ import NavProfileBtn from "./NavProfileBtn/NavProfileBtn";
 import HeaderAuth from "./HeaderAuth/HeaderAuth";
 import Navigation from "./Navigation/Navigation";
 import HeaderNav from "./HeaderNav/HeaderNav";
-import Logo from "./Logo/Logo";
+import Logo from "../Logo/Logo";
 import React from "react";
 import './Header.css'
 
