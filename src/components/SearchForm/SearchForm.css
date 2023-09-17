@@ -1,0 +1,149 @@
+.search {
+  padding: 70px 70px;
+  background: #FAFAFA;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.search__form {
+  flex-direction: row;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 9px;
+  margin: 0 0 69px;
+  min-height: 72px;
+  display: flex;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+}
+
+.search__input {
+  border: none;
+  background: #FFFFFF;
+  padding: 0 0 0 10px;
+  font-style: normal;
+  line-height: 20px;
+  font-weight: 400;
+  font-size: 18px;
+  outline: none;
+  width: 100%;
+}
+
+.search__border {
+  background: #E8E8E8;
+  margin: 0 27px 0;
+  height: 40px;
+  width: 1px;
+}
+
+input::-webkit-input-placeholder {
+  color: #a0a0a0;
+}
+
+input:-moz-placeholder {
+  color: #a0a0a0;
+}
+
+input::-moz-placeholder {
+  color: #a0a0a0;
+}
+
+input:-ms-input-placeholder {
+  color: #a0a0a0;
+}
+
+.search__button {
+  transition: opacity 0.2s linear;
+  background-color: #FFFFFF;
+  padding: 5px 3px 3px 2px;
+  line-height: 18px;
+  font-weight: 500;
+  font-size: 11px;
+  color: #FFFFFF;
+  border: none;
+  margin: 0;
+  cursor: pointer;
+}
+
+.filter__standart-size{
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+}
+
+.filter__mini-size {
+  display: none;
+}
+.search__button:hover {
+  opacity: .8;
+}
+
+.search__search-image {
+  margin-left: 19px;
+  height: 34px;
+  width: 34px;
+}
+
+@media screen and (max-width: 1023px) {
+  .search {
+    padding: 69px 30px 0;
+  }
+
+  .search__form {
+    margin-bottom: 25px;
+  }
+
+  .search__border-bottom {
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .search {
+    padding: 69px 14px 0;
+  }
+
+  .search__form {
+    padding: 0;
+    margin: 0;
+  }
+
+  .search__label {
+    display: none;
+  }
+
+  .search__input {
+    width: calc(100% - 80px);
+    padding: 17px 11px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .search__button {
+    width: 82px;
+    height: 44px;
+    margin-right: 5px;
+  }
+
+  .search__border-bottom  {
+    margin-top: 62px;
+  }
+
+  .search__search-image {
+    margin-right: -4px;
+  }
+
+  .search__search-image-none {
+    display: none;
+  }
+  .search__border {
+    display: none;
+  }
+  .filter__standart-size {
+    display: none;
+  }
+  .filter__mini-size {
+    justify-content: center;
+    align-items: center;
+    margin: 46px 0 45px 0;
+    display: flex;
+  }
+}
