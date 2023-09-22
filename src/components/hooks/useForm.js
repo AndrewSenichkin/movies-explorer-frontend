@@ -14,19 +14,16 @@ const useForm = () => {
   const handleChangeInput = (event) => {
     const name = event.target.name
     const value = event.target.value
-
     // Обновляем состояние введенных значений
     setEnteredInputValues({
       ...enteredValues,
       [name]: value,
     })
-
     // Обновляем состояние ошибок валидации
     setErrors({
       ...errors,
       [name]: event.target.validationMessage,
     })
-
     // Обновляем состояние валидности формы
     setIsFormValid(event.target.closest("#form").checkValidity())
   }
