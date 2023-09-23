@@ -1,46 +1,85 @@
-import {useState} from "react";
-import React from "react";
-import "./MoviesCard.css";
+import React from "react"
+import { durationConverter } from "../../utils/utils"
+import "./MoviesCard.css"
 
-const MoviesCard = ({card, flag}) => {
-    const [saveMovie, setSaveMovie] = useState(false);
+//Компонент MoviesCard отображает карточку фильма и содержит функции
+// и данные, связанные с отображением и взаимодействием с фильмами.
+function MoviesCard({
+  card,
+  isSavedFilms,
+  handleLikeFilm,
+  onDeleteCard,
+  saved,
+  savedMovies,
+}) {
+  // Обработчик клика по карточке фильма
+  // Если фильм сохранен, вызывается функция onDeleteCard с удалением
+  // соответствующего фильма из savedMovies. В противном случае
+  // вызывается функция handleLikeFilm с передачей выбранного фильма.
+  function onCardClick() {
+    if (saved) {
+      onDeleteCard(savedMovies.filter((m) => m.movieId === card.id)[0])
+    } else {
+      handleLikeFilm(card)
+    }
+  }
 
-    const handleSaveMovie = () => {
-        if (!saveMovie && flag === "add-favorites-btn")
-            return setSaveMovie(true);
+  // Обработчик удаления карточки фильма
+  function onDelete() {
+    onDeleteCard(card)
+  }
 
-        return setSaveMovie(false);
-    };
+  // Класс кнопки лайка
+  //cardLikeButtonClassName - это переменная, которая определяет
+  // класс кнопки лайка в зависимости от значения saved.
+  // Если фильм сохранен, применяется класс card__like-button_active,
+  // иначе - класс card__like-button.
+  const cardLikeButtonClassName = `${
+    saved ? "card__like-button card__like-button_active" : "card__like-button"
+  }`
 
-    return (
-        <li className="movies-card__card">
-            <a
-                href="https://www.kinopoisk.ru/film/1390163/"
-                className="movies-card__link"
-                rel="noreferrer"
-                target="_blank">
-                <img
-                    className="movies-card__image"
-                    src={card.image}
-                    alt={card.nameRU}/>
-            </a>
-            <div className="movies-card__info">
-                <div className="movies-card__info-container">
-                    <h2 className="movies-card__title">{card.nameRU}</h2>
-                    <p className="movies-card__time">{card.duration}</p>
-                </div>
-                <button
-                    className={`movies-card__${flag} movies-card__${flag}_${
-                        saveMovie
-                            ? "active"
-                            : ""
-                    }`}
-                    onClick={handleSaveMovie}
-                    type="button"
-                />
-            </div>
-        </li>
-    );
-};
+  return (
+    <>
+      <li key={card.id} className="card">
+        {/*При клике на изображение фильма открывается ссылка на трейлер фильма в новой вкладке браузера.*/}
+        <a href={card.trailerLink} target="_blank" rel="noreferrer">
+          <img
+            className="card__image"
+            alt={card.nameRU}
+            src={
+              isSavedFilms
+                ? card.image
+                : `https://api.nomoreparties.co/${card.image.url}`
+            }
+          />
+        </a>
 
-export default MoviesCard;
+        <div className="card__container">
+          <div className="card__title-block">
+            <h2 className="card__title">{card.nameRU}</h2>
+            <span className="card__time">
+              {/* Функция durationConverter используется для преобразования длительности фильма в удобный формат отображения. */}
+              {durationConverter(card.duration)}
+            </span>
+          </div>
+
+          {isSavedFilms ? (
+            <button
+              type="button"
+              className="card__delete-button"
+              onClick={onDelete}
+            ></button>
+          ) : (
+            <button
+              type="button"
+              className={cardLikeButtonClassName}
+              onClick={onCardClick}
+            ></button>
+          )}
+        </div>
+      </li>
+    </>
+  )
+}
+
+export default MoviesCard

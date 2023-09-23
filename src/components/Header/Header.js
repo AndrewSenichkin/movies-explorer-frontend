@@ -1,45 +1,82 @@
-import NavProfileBtn from "./NavProfileBtn/NavProfileBtn";
-import HeaderAuth from "./HeaderAuth/HeaderAuth";
-import Navigation from "./Navigation/Navigation";
-import HeaderNav from "./HeaderNav/HeaderNav";
-import Logo from "./Logo/Logo";
 import React from "react";
-import './Header.css'
+import { Link, NavLink } from "react-router-dom";
+import "./Header.css";
+import logo from "../../images/logo.svg";
+import account from "../../images/account.svg";
+import menu from "../../images/menu-button.svg";
+import Navigation from "../Navigation/Navigation";
+import { useLocation } from "react-router-dom";
 
-const Header = ({auth}) => {
-    const [isOpen, setIsOpen] = React.useState(false);
+function Header({ loggedIn }) {
+  
+  const [isClicked, setIsClicked] = React.useState(false)
+  const { pathname } = useLocation();
+  const isBasePath = pathname === "/";
+  const isHeaderPath =
+  pathname === "/" ||
+  pathname === "/movies" ||
+  pathname === "/saved-movies" ||
+  pathname === "/profile";
+  // Функция для смены цвета для активной ссылки
+  const setActive = ({ isActive }) =>
+    isActive ? "header__button_active" : "header__button"
 
-    function handleClickOpen() {
-        setIsOpen(true)
-    }
+  function handleOpen() {
+    setIsClicked(true)
+  }
 
-    function handleClickClose() {
-        setIsOpen(false)
-    }
-
-    return (
-    <div>
-        {auth ? (
-        <header className='header header__signup'>  
-            <div className='header__logo-container'>
-                <Logo/>
-                {auth && <HeaderNav onClick={handleClickOpen}/>}
-            </div>
-            {!auth ? <HeaderAuth/> : <NavProfileBtn isOpen={handleClickOpen}/>}
-            <Navigation isOpen={isOpen} onClick={handleClickClose}/>
+  function handleClose() {
+    setIsClicked(false)
+  }
+  if(isHeaderPath) {
+  return (
+    <>
+      {!loggedIn ? (
+        <header className={`header ${!isBasePath  && 'header__signup'}`} id="header">
+          <Link to="/" className="form__logo">
+            <img src={logo} alt="логотип сайта" />
+          </Link>
+          <div className="header__button-container">
+            <Link to="/signup" className="header__button">
+              Регистрация
+            </Link>
+            <Link to="/signin" className="header__button header__button-green">
+              Войти
+            </Link>
+          </div>
         </header>
-        ) : (
-            <header className='header'>  
-            <div className='header__logo-container'>
-                <Logo/>
-                {auth && <HeaderNav onClick={handleClickOpen}/>}
-            </div>
-            {!auth ? <HeaderAuth/> : <NavProfileBtn isOpen={handleClickOpen}/>}
-            <Navigation isOpen={isOpen} onClick={handleClickClose}/>
-        </header>  
-        )}
-    </div>
-    );
+      ) : (
+        <header className={`header ${!isBasePath  && 'header__signup'}`} id="header-gray">
+          <Link to="/" className="form__logo">
+            <img src={logo} alt="логотип сайта" />
+          </Link>
+          <div className="header__button-container header__button-container_films">
+            <NavLink to="/movies" className={setActive}>
+              Фильмы
+            </NavLink>
+
+            <NavLink to="/saved-movies" className={setActive}>
+              Сохранённые фильмы
+            </NavLink>
+          </div>
+          <div className="header__button-container">
+            <Link to="/profile" className="header__account-button">
+              <img
+                className="header__account-image"
+                src={account}
+                alt="изображение кнопки аккаунта"
+              />
+            </Link>
+            <button className="header__menu-button" onClick={handleOpen}>
+              <img src={menu} alt="меню" />
+            </button>
+          </div>
+          {isClicked ? <Navigation handleClose={handleClose} /> : ""}
+        </header>
+      )}
+    </>
+  )
+  }
 }
 
-export default Header;
+export default Header
